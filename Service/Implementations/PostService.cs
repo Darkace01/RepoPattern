@@ -1,6 +1,7 @@
 ﻿using Core;
 using Data.Contracts;
 using Data.Implementations;
+using Service.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Service.Implementations
 {
-    public class PostService
+    public class PostService : IPostService
     {
         public readonly UnitOfWork _uow;
         public PostService(IUnitOfWork uow)
