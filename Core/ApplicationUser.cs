@@ -15,5 +15,6 @@ namespace Core
         [StringLength(50, MinimumLength = 2,
             ErrorMessage = "Full name must be atleast 2 characters long and not more than 50")]
         public string FullName { get; set; }
+        public ICollection<Post> Posts { get; set; }
     }
 }

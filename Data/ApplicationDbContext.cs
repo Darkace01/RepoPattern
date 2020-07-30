@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Core;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace RepoPattern.Data
+namespace Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -12,5 +10,8 @@ namespace RepoPattern.Data
             : base(options)
         {
         }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<Post> Post { get; set; }
     }
 }
