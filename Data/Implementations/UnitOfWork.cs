@@ -9,10 +9,14 @@ namespace Data.Implementations
     public class UnitOfWork : IUnitOfWork, IDisposable
     {
         public ApplicationDbContext _context { get; set; }
+        public PostRepo PostRepo { get; set; }
+        public UserRepo UserRepo { get; set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
             this._context = context;
+            this.PostRepo = new PostRepo(this._context);
+            this.UserRepo = new UserRepo(this._context);
         }
 
         public async Task Save()
