@@ -1,0 +1,85 @@
+@model RepoPattern.Models.ViewModel.AddPostViewModel
+@{
+ViewData["Title"] = "Add Post";
+Layout = "~/Views/Shared/Dashboard/_DashboardLayout.cshtml";
+}
+
+
+
+<link href="~/admin/css/select2.min.css" rel="stylesheet" />
+
+<form  method="POST">
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+
+            <div class="card-body">
+                
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label asp-for="Title"></label>
+                                <input asp-for="Title" type="text" class="form-control" placeholder="Post Title">
+                                <span asp-validation-for="Title" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- text input -->
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <input asp-for="Description" type="text" class="form-control" placeholder="Post Description">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <!-- textarea -->
+                            <div class="form-group">
+                                <label asp-for="Content"></label>
+                                <textarea asp-for="Content" class="form-control" rows="10" placeholder="Post Content"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+    </div>
+    <div class="col-md-4">
+        
+        <div class="card">
+            <div class="card-body">
+                <button type="submit" class="btn btn-block btn-primary btn-lg mb-3">Publish</button>
+                <div class="form-group card-comments bg-white">
+                    <label >Tags <span class="comment-text">Use comma to seperate them</span></label>
+                    <select id="classTgs" multiple="multiple" class="form-control" name="classTags"></select>
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+
+<script>
+    $(document).ready(function () {
+
+        $("#classTgs").select2({
+            tags: true,
+            tokenSeparators: [',']
+        });
+    });
+    </script>
+    @section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/admin/js/select2.full.min.js"></script>
+}
+

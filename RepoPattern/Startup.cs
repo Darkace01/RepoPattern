@@ -14,6 +14,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Data;
 using Core;
+using Data.Contracts;
+using Data.Implementations;
+using Service.Contracts;
+using Service.Implementations;
 
 namespace RepoPattern
 {
@@ -44,6 +48,15 @@ namespace RepoPattern
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped(serviceType: typeof(IUnitOfWork), implementationType: typeof(UnitOfWork));
+
+            //repos
+            services.AddScoped(serviceType: typeof(ICoreRepo<>), implementationType: typeof(CoreRepo<>));
+
+            //services
+            services.AddScoped(serviceType: typeof(IPostService), implementationType: typeof(PostService));
+            services.AddScoped(serviceType: typeof(IUserService), implementationType: typeof(UserService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
