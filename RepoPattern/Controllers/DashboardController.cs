@@ -25,7 +25,19 @@ namespace RepoPattern.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<ViewPostViewModel> posts = _postService.GetAllPosts()
+            .Select(p => new ViewPostViewModel
+            {
+                Id = p.ID,
+                Content = p.Content,
+                Title = p.Title,
+                Description = p.Description,
+                Tags = p.Tags,
+                DateCreated = p.DateCreated,
+                UserName = p.ApplicationUser.FullName
+            }).ToList();
+
+            return View(posts);
         }
 
         public IActionResult AddPost()
@@ -64,6 +76,15 @@ namespace RepoPattern.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
             return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet("{Id}")]
+        public IActionResult EditPost(int? Id)
+        {
+            if(Id == null)
+            {
+                return NotFound();
+            }
         }
 
         private ApplicationUser GetLoggedInUser()

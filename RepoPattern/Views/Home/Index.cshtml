@@ -13,9 +13,9 @@
         <article class="text-center">
           <img class="img-fluid mb-4" src="@Url.Content(post.IconUri)" alt="post-thumb">
           <p class="text-uppercase mb-2">@post.Tags</p>
-          <h4 class="title-border"><a class="text-dark" href="blog-single.html">@post.Title</a></h4>
+          <h4 class="title-border"><a class="text-dark" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
           <p>@post.Description</p>
-          <a href="#" class="btn btn-transparent">read more</a>
+          <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id"class="btn btn-transparent">read more</a>
         </article>
       </div>
         }

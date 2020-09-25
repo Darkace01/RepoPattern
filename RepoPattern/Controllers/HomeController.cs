@@ -35,6 +35,43 @@ namespace RepoPattern.Controllers
             return View(posts);
         }
 
+        [HttpGet("{Id}")]
+        public IActionResult Post(int? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            var p = _postService.GetPostById(Id.Value);
+            List<LatestPostViewModel> posts = _postService.GetAllPosts()
+                .Select(l => new LatestPostViewModel {
+                    Id = l.ID,
+                    Title = l.Title,
+                    IconUri = l.IconUri,
+                    Description = l.Description,
+                    DateCreated = l.DateCreated,
+                    Fullname = l.ApplicationUser.FullName
+                }).ToList();
+           if(p != null)
+            {
+                ViewPostViewModel post = new ViewPostViewModel()
+                {
+                    Id = p.ID,
+                    Content = p.Content,
+                    DateCreated = p.DateCreated,
+                    Description = p.Description,
+                    IconUri = p.IconUri,
+                    Tags = p.Tags,
+                    Title = p.Title,
+                    UserName = p.ApplicationUser.FullName,
+                    Posts = posts
+                };
+                
+                return View(post);
+            }
+            return NotFound();
+        }
+
         public IActionResult Privacy()
         {
             return View();

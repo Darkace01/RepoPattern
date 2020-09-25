@@ -1,4 +1,72 @@
+@model IEnumerable<RepoPattern.Models.ViewModel.ViewPostViewModel>
 @{
-ViewData["Title"] = "Dashbboard";
-Layout = "~/Views/Shared/Dashboard/_DashboardLayout.cshtml";
+    ViewData["Title"] = "Dashbboard";
+    Layout = "~/Views/Shared/Dashboard/_DashboardLayout.cshtml";
 }
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">All Blog Post</h3>
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" style="height: 67vh;">
+                <table class="table table-head-fixed">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Date Created</th>
+                            <th>Description</th>
+                            <th>Created By</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var post in Model)
+                            {
+                                <tr>
+                                    <td>@post.Id</td>
+                                    <td>@post.Title</td>
+                                    <td>@post.DateCreated.ToString("MM,dd,yyyy")</td>
+                                    <td><span class="tag tag-success">@post.Description</span></td>
+                                    <td>@post.UserName</td>
+                                    <th>
+                                        <a asp-action="Edit" asp-route-id="@post.Id">Edit</a> |
+                                        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@post.Id">Delete</a>
+
+                                    </th>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    <li class="page-item"><a class="page-link" href="#">«</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">»</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

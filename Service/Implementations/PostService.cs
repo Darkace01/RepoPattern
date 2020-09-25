@@ -38,11 +38,11 @@ namespace Service.Implementations
 
         public IEnumerable<Post> GetAllPosts()
         {
-            return _uow.PostRepo.GetAll().Where(p => !p.IsDeleted);
+            return _uow.PostRepo.GetAllPostsWithRelationships().Where(p => !p.IsDeleted);
         }
         public Post GetPostById(int postId)
         {
-            return _uow.PostRepo.Find(p => p.ID == postId).Where(p => !p.IsDeleted).FirstOrDefault();
+            return _uow.PostRepo.GetPostWithRelationships(postId);
         }
 
         public async Task DeletePost(Post post)
