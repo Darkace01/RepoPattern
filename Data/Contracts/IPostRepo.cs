@@ -9,5 +9,6 @@ namespace Data.Contracts
     {
         IEnumerable<Post> GetAllPostsWithRelationships();
         Post GetPostWithRelationships(int id);
+        Post GetPostWithRelationshipsByUserId(int postId, string userId);
     }
 }

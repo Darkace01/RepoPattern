@@ -20,7 +20,7 @@ namespace Test.TestData
             return user;
         }
 
-        public Post GetPost(int id, string title, string content, string description, string tags,string iconUri, string userId)
+        public Post GetPost(int id, string title, string content, string description, string tags,string iconUri, ApplicationUser user)
         {
             var post = new Post()
             {
@@ -33,7 +33,7 @@ namespace Test.TestData
                 IsDeleted = false,
                 Tags = tags,
                 IconUri = iconUri,
-                ApplicationUserId = userId
+                ApplicationUser = user
 
             };
             return post;

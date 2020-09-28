@@ -13,5 +13,8 @@ namespace Service.Contracts
         Task CreatePost(Post post);
         Task UpdatePost(Post post);
         Task DeletePost(Post post);
+        Post GetPostByIdandUserId(int postId, string userId);
+        IEnumerable<Post> GetAllPostByUserId(string Id);
+        Boolean IsTitleExist(string postTitle, string userId);
     }
 }

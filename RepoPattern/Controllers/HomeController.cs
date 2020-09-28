@@ -35,7 +35,7 @@ namespace RepoPattern.Controllers
             return View(posts);
         }
 
-        [HttpGet("{Id}")]
+        [HttpGet("{Action}/{Id}")]
         public IActionResult Post(int? Id)
         {
             if (Id == null)

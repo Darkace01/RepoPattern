@@ -38,7 +38,7 @@ namespace Test.UnitTest.Services
                 //Arrange 
                 var postService = MockPostService(context);
                 var dataFactory = new DataFactory();
-                var Post = dataFactory.GetPost(7, "post1", "postcontent1", "postdescription1", "posttags", "posturi","1234");
+                var Post = dataFactory.GetPost(7, "post1", "postcontent1", "postdescription1", "posttags", "posturi", dataFactory.GetApplicationUser("1235", "user3@email.com", "user3", "userfullname3", "passwordhash"));
 
                 //Act
                 postService.CreatePost(Post);
@@ -56,7 +56,7 @@ namespace Test.UnitTest.Services
                 //Arrange
                 var postService = MockPostService(context);
                 var dataFactory = new DataFactory();
-                var post = dataFactory.GetPost(7, "post33", "postcontent1", "postdescription1", "posttags", "posturi", "1234");
+                var post = dataFactory.GetPost(7, "post33", "postcontent1", "postdescription1", "posttags", "posturi", dataFactory.GetApplicationUser("1235", "user3@email.com", "user3", "userfullname3", "passwordhash"));
 
                 //Act
                 postService.UpdatePost(post);

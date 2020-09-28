@@ -45,6 +45,25 @@ namespace Service.Implementations
             return _uow.PostRepo.GetPostWithRelationships(postId);
         }
 
+        public Post GetPostByIdandUserId(int postId, string userId)
+        {
+            return _uow.PostRepo.GetPostWithRelationshipsByUserId(postId, userId);
+        }
+
+        public IEnumerable<Post> GetAllPostByUserId(string Id)
+        {
+            return _uow.PostRepo.GetAllPostsWithRelationships().Where(p => p.ApplicationUser.Id == Id);
+        }
+
+        public Boolean IsTitleExist(string postTitle, string userId)
+        {
+            var post = _uow.PostRepo.GetAllPostsWithRelationships().Where(p => p.Title == postTitle && p.ApplicationUser.Id == userId).FirstOrDefault();
+            if (post != null)
+                return true;
+            return false;
+        }
+
+
         public async Task DeletePost(Post post)
         {
             if(post != null)

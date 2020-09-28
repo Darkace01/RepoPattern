@@ -31,6 +31,13 @@ namespace Data.Implementations
                 .Include(p => p.ApplicationUser)
                 .FirstOrDefault();
         }
+
+        public Post GetPostWithRelationshipsByUserId(int postId, string userId)
+        {
+            return _DbSet.Where(n => n.ID == postId && !n.IsDeleted && n.ApplicationUser.Id == userId)
+                .Include(p => p.ApplicationUser)
+                .FirstOrDefault();
+        }
     }
 
 }

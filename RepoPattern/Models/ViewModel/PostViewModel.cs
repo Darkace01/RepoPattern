@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ namespace RepoPattern.Models.ViewModel
     public class AddPostViewModel
     {
         [Required]
+        [Remote(action: "IsPostNameExist", controller: "Dashboard", ErrorMessage = "The Title Already exists, Kindly pick a different one")]
         public string Title { get; set; }
         [Required]
         public string Description { get; set; }
@@ -42,7 +44,10 @@ namespace RepoPattern.Models.ViewModel
 
     public class EditPostViewModel
     {
+        [Required]
         public int Id { get; set; }
+        [Required]
+        [Remote(action: "IsPostNameExist", controller: "Dashboard", ErrorMessage = "The Title Already exists, Kindly pick a different one")]
         public string Title { get; set; }
         public string Description { get; set; }
         public string Content { get; set; }

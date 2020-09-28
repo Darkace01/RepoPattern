@@ -1,4 +1,4 @@
-@model RepoPattern.Models.ViewModel.AddPostViewModel
+﻿@model RepoPattern.Models.ViewModel.EditPostViewModel
 @{
     ViewData["Title"] = "Add Post";
     Layout = "~/Views/Shared/Dashboard/_DashboardLayout.cshtml";
@@ -19,6 +19,7 @@
                         <div class="col-sm-12">
                             <div asp-validation-summary="All" class="text-danger"></div>
                             <!-- text input -->
+                            <input asp-for="Id" hidden/>
                             <div class="form-group">
                                 <label asp-for="Title"></label>
                                 <input asp-for="Title" type="text" class="form-control" placeholder="Post Title">
@@ -59,7 +60,15 @@
                     <button type="submit" class="btn btn-block btn-primary btn-lg mb-3">Publish</button>
                     <div class="form-group card-comments bg-white">
                         <label>Tags <span class="comment-text">Use comma to seperate them</span></label>
-                        <select id="classTgs" multiple="multiple" class="form-control" name="classTags"></select>
+                        <select id="classTgs" multiple="multiple" class="form-control" name="classTags">
+                            @if (ViewBag.ClassTags != null)
+                            {
+                                foreach (var item in ViewBag.ClassTags)
+                                {
+                                    <option selected="selected">@item</option>
+                                }
+                            }
+                        </select>
                         <span class="text-danger"></span>
                     </div>
                 </div>
@@ -80,7 +89,6 @@
 </script>
 @section Scripts {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <script src="~/admin/js/select2.full.min.js"></script>
 }
 

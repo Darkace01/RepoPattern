@@ -33,8 +33,8 @@ namespace Test
             context.SaveChanges();
 
             //post 2
-            posts.Add(dataFactory.GetPost(1, "post1", "postcontent1", "postdescription1", "posttags", "posturi", "123"));
-            posts.Add(dataFactory.GetPost(2, "post2", "postcontent2", "postdescription2", "posttags", "posturi", "1234"));
+            posts.Add(dataFactory.GetPost(1, "post1", "postcontent1", "postdescription1", "posttags", "posturi", dataFactory.GetApplicationUser("1235", "user3@email.com", "user3", "userfullname3", "passwordhash")));
+            posts.Add(dataFactory.GetPost(2, "post2", "postcontent2", "postdescription2", "posttags", "posturi", dataFactory.GetApplicationUser("1235", "user3@email.com", "user3", "userfullname3", "passwordhash")));
             context.Post.AddRange(posts);
             context.SaveChanges();
 
