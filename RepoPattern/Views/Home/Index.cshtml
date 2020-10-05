@@ -4,22 +4,30 @@
 }
 
 <section class="section">
-  <div class="container">
-    <div class="row masonry-container">
-        @if(Model != null){
-            foreach (var post in Model)
-        {
-            <div class="col-lg-4 col-sm-6 mb-5">
-        <article class="text-center">
-          <img class="img-fluid mb-4" src="@Url.Content(post.IconUri)" alt="post-thumb">
-          <p class="text-uppercase mb-2">@post.Tags</p>
-          <h4 class="title-border"><a class="text-dark" asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">@post.Title</a></h4>
-          <p>@post.Description</p>
-          <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id"class="btn btn-transparent">read more</a>
-        </article>
-      </div>
-        }
-        }
+    <div class="container">
+        <div class="row masonry-container">
+            @if (Model != null)
+            {
+                foreach (var post in Model)
+                {
+
+                    var parms = new Dictionary<string, string>
+                    {
+                    {"postUrl", post.PostUrl },
+                    };
+
+                    <div class="col-lg-4 col-sm-6 mb-5">
+                        <article class="text-center">
+                            <img class="img-fluid mb-4" src="@Url.Content(post.IconUri)" alt="post-thumb">
+                            <p class="text-uppercase mb-2">@post.Tags</p>
+                            <h4 class="title-border"><a class="text-dark" asp-controller="Home" asp-action="Post" asp-all-route-data="parms">@post.Title</a></h4>
+                            <p>@post.Description</p>
+
+                            <a asp-route="Post" asp-all-route-data="parms" class="btn btn-transparent">read more</a>
+                        </article>
+                    </div>
+                }
+            }
+        </div>
     </div>
-  </div>
 </section>

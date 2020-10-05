@@ -11,7 +11,9 @@
                 <h3 class="card-title">All Blog Post</h3>
 
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
+                    
+                    <div class="input-group input-group-sm" style="width: 20rem;">
+                        <a asp-controller="Dashboard" asp-action="AddPost" class="btn btn-default">Add Post</a>
                         <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                         <div class="input-group-append">
@@ -45,9 +47,9 @@
                                     <td><span class="tag tag-success">@post.Description</span></td>
                                     <td>@post.UserName</td>
                                     <th>
-                                        <a asp-action="EditPost" asp-route-id="@post.Id">Edit</a> |
-                                        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">Details</a> |
-                                        <a asp-action="Delete" asp-route-id="@post.Id">Delete</a>
+                                        <a asp-action="EditPost" asp-route-id="@post.PostUrl">Edit</a> |
+                                        <a asp-controller="Home" asp-action="Post" asp-route-id="@post.PostUrl">Details</a> |
+                                        <a asp-action="Delete" asp-route-id="@post.PostUrl">Delete</a>
 
                                     </th>
                                 </tr>

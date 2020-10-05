@@ -63,6 +63,16 @@ namespace Service.Implementations
             return false;
         }
 
+        public Post GetPostByUrl(string url, string userId)
+        {
+            return _uow.PostRepo.GetAllPostsWithRelationships().Where(p => p.PostUrl == url && p.ApplicationUser.Id == userId).FirstOrDefault();
+        }
+
+        public Post GetPostByUrlOnly(string url)
+        {
+            return _uow.PostRepo.GetAllPostsWithRelationships().Where(p => p.PostUrl == url).FirstOrDefault();
+        }
+
 
         public async Task DeletePost(Post post)
         {

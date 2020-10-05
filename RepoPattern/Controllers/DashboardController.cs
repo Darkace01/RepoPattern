@@ -34,7 +34,8 @@ namespace RepoPattern.Controllers
                 Description = p.Description,
                 Tags = p.Tags,
                 DateCreated = p.DateCreated,
-                UserName = p.ApplicationUser.FullName
+                UserName = p.ApplicationUser.FullName,
+                PostUrl = p.PostUrl
             }).ToList();
 
             return View(posts);
@@ -64,7 +65,8 @@ namespace RepoPattern.Controllers
                         IconUri = "https://image.freepik.com/free-vector/farmer-peasant-illustration-man-with-beard-spade-farmland_33099-575.jpg",
                         IsDeleted = false,
                         DateCreated = DateTime.Now,
-                        DateModified = DateTime.Now
+                        DateModified = DateTime.Now,
+                        PostUrl = url
                     };
 
                     _postService.CreatePost(post);
@@ -95,6 +97,7 @@ namespace RepoPattern.Controllers
             post.Title = posts.Title;
             post.Description = posts.Description;
             post.Content = posts.Content;
+            post.PostUrl = post.PostUrl;
             List<string> tags = posts.Tags.Split(',').ToList();
 
             ViewBag.ClassTags = tags;
@@ -102,7 +105,7 @@ namespace RepoPattern.Controllers
             return View(post);
         }
 
-        [HttpPost("{Action}/{Id}")]
+        [HttpPost("{Action}")]
         public IActionResult EditPost(EditPostViewModel model, List<string> classTags)
         {
             if (ModelState.IsValid)
@@ -110,13 +113,14 @@ namespace RepoPattern.Controllers
                 var user = GetLoggedInUser();
                 string classT = classTags != null ? String.Join(",", classTags) : "";
                 var oldPost = _postService.GetPostByIdandUserId(model.Id, user.Id);
-
+                string url = model.Title != null ? String.Join(" ", model.Title) : "-";
                 oldPost.Title = model.Title;
                 oldPost.Description = model.Description;
                 oldPost.Content = model.Content;
                 oldPost.Tags = classT;
                 oldPost.IconUri = "https://image.freepik.com/free-vector/farmer-peasant-illustration-man-with-beard-spade-farmland_33099-575.jpg";
                 oldPost.DateModified = DateTime.Now;
+                oldPost.PostUrl = url;
 
                 _postService.UpdatePost(oldPost);
                 return RedirectToAction(nameof(Index));
@@ -124,6 +128,34 @@ namespace RepoPattern.Controllers
             return View(model);
         }
 
+        [HttpGet("{Action}/{url}")]
+        public IActionResult EditPost(string url)
+        {
+            if (url == null)
+            {
+                return NotFound();
+            }
+            var posts = _postService.GetPostByUrl(url, GetLoggedInUser().Id);
+            if (posts == null)
+            {
+                return NotFound();
+            }
+            EditPostViewModel post = new EditPostViewModel();
+
+            post.Id = posts.ID;
+            post.Title = posts.Title;
+            post.Description = posts.Description;
+            post.Content = posts.Content;
+            post.PostUrl = posts.PostUrl;
+            List<string> tags = posts.Tags.Split(',').ToList();
+
+            ViewBag.ClassTags = tags;
+
+            return View(post);
+        }
+
+
+        #region Helper Methods
         public JsonResult IsPostNameExist(string title)
         {
             var post = _postService.IsTitleExist(title, GetLoggedInUser().Id);
@@ -140,5 +172,6 @@ namespace RepoPattern.Controllers
             var user = _userService.GetUserById(userId);
             return user;
         }
+        #endregion
     }
 }

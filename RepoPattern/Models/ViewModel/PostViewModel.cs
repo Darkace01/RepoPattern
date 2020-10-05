@@ -27,6 +27,7 @@ namespace RepoPattern.Models.ViewModel
         public string IconUri { get; set; }
         public string Tags { get; set; }
         public DateTime DateCreated { get; set; }
+        public string PostUrl { get; set; }
         public string UserName { get; set; }
         public List<LatestPostViewModel> Posts { get; set; }
 
@@ -39,6 +40,7 @@ namespace RepoPattern.Models.ViewModel
         public string Description { get; set; }
         public string IconUri { get; set; }
         public DateTime DateCreated { get; set; }
+        public string PostUrl { get; set; }
         public string Fullname { get; set; }
     }
 
@@ -53,6 +55,7 @@ namespace RepoPattern.Models.ViewModel
         public string Content { get; set; }
         public string IconUri { get; set; }
         public string Tags { get; set; }
+        public string PostUrl { get; set; }
 
     }
 }

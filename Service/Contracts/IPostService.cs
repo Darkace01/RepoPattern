@@ -16,5 +16,7 @@ namespace Service.Contracts
         Post GetPostByIdandUserId(int postId, string userId);
         IEnumerable<Post> GetAllPostByUserId(string Id);
         Boolean IsTitleExist(string postTitle, string userId);
+        Post GetPostByUrl(string url, string userId);
+        Post GetPostByUrlOnly(string url);
     }
 }
